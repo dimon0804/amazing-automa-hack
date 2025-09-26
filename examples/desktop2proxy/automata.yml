@@ -1,0 +1,5 @@
+deploy:
+  docker:
+    image: desktop2proxy/app:local
+    file: Dockerfile
+    push: false

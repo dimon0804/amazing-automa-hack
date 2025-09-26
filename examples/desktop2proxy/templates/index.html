@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Desktop2Proxy — upload</title>
+  <style>
+    body{font-family:Arial;margin:40px}
+    .box{max-width:700px}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Desktop2Proxy — загрузка CSV</h1>
+    <p>CSV с заголовками: <code>ip,username,password</code></p>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <input type="file" name="file" accept=".csv"><br><br>
+      <button type="submit">Загрузить и запустить</button>
+    </form>
+  </div>
+</body>
+</html>

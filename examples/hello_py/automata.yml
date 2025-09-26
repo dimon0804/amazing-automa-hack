@@ -1,0 +1,25 @@
+build:
+  python:
+    command: pip install -r requirements.txt
+    output: dist/
+deploy:
+  docker:
+    env:
+      PORT: '8000'
+      PYTHONUNBUFFERED: '1'
+    file: Dockerfile
+    image: hello-py:latest
+    port: 8000
+    push: false
+  ssh:
+    host: localhost
+    path: /opt/hello-py
+    restart: systemctl restart hello-py
+    user: root
+description: Auto-generated config for hello-py
+name: hello-py
+test:
+  python:
+    command: pytest -v
+    coverage: true
+version: 1.0.0

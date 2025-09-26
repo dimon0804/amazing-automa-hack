@@ -1,0 +1,5 @@
+deploy:
+  docker:
+    image: sample/api:local
+    file: Dockerfile
+    push: false

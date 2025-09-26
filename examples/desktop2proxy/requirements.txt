@@ -1,0 +1,7 @@
+flask==2.2.5
+werkzeug==2.3.7
+python-nmap==0.7.1
+paramiko==3.4.0
+requests==2.31.0
+pysnmp==4.4.12
+pytest==8.4.2
