@@ -1,0 +1,14 @@
+# Пример конфигурации Automata
+
+deploy:
+  docker:
+    image: ghcr.io/org/app:${{ github.sha }}
+    file: Dockerfile
+    push: false
+  ssh:
+    host: example.com
+    user: deploy
+    path: /opt/apps/myapp
+    restart: sudo systemctl restart myapp
+
+

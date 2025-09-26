@@ -1,0 +1,30 @@
+{
+  "name": "automata-cicd",
+  "version": "0.1.0",
+  "description": "Универсальный CLI для сборки и доставки приложений разных стеков",
+  "type": "module",
+  "bin": {
+    "automata": "bin/automata.js"
+  },
+  "scripts": {
+    "start": "node bin/automata.js",
+    "test": "node -e \"console.log('ok')\""
+  },
+  "keywords": [
+    "ci",
+    "cd",
+    "pipeline",
+    "build",
+    "deploy"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@iarna/toml": "^2.2.5",
+    "execa": "^8.0.1",
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.2.0",
+    "which": "^4.0.0",
+    "yaml": "^2.5.0",
+    "yargs": "17.7.2"
+  }
+}
