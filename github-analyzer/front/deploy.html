@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/styleses.css">
+  <title>Развертывание на сервере - Amazing Automata</title>
+</head>
+<body>
+  <div class="main-wrapper">
+    <div class="container main-container">
+      <div class="card">
+        <h1>🚀 Развертывание на сервере</h1>
+        <p class="lead">Автоматическое развертывание GitHub репозитория на удаленном сервере</p>
+        
+        <!-- Навигация -->
+        <div class="nav-tabs">
+          <button class="nav-tab active" onclick="showTab('server-tab')">🔧 Подключение к серверу</button>
+          <button class="nav-tab" onclick="showTab('repo-tab')">📦 Выбор репозитория</button>
+          <button class="nav-tab" onclick="showTab('deploy-tab')">⚡ Развертывание</button>
+        </div>
+
+        <!-- Таб 1: Подключение к серверу -->
+        <div id="server-tab" class="tab-content active">
+          <h3>🔧 Настройка подключения к серверу</h3>
+          <form id="server-config-form">
+            <div class="form-group">
+              <label for="server-ip">IP адрес сервера</label>
+              <input 
+                id="server-ip" 
+                name="server-ip" 
+                type="text" 
+                placeholder="192.168.1.100 или example.com" 
+                required
+                pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]?\.[a-zA-Z]{2,}$"
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="server-port">SSH порт</label>
+              <input 
+                id="server-port" 
+                name="server-port" 
+                type="number" 
+                placeholder="22" 
+                value="22"
+                min="1" 
+                max="65535"
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="server-user">Пользователь</label>
+              <input 
+                id="server-user" 
+                name="server-user" 
+                type="text" 
+                placeholder="root или ubuntu" 
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="server-password">Пароль</label>
+              <input 
+                id="server-password" 
+                name="server-password" 
+                type="password" 
+                placeholder="Пароль для SSH"
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="deploy-path">Путь для развертывания</label>
+              <input 
+                id="deploy-path" 
+                name="deploy-path" 
+                type="text" 
+                placeholder="/opt/apps" 
+                value="/opt/apps"
+                required
+              >
+            </div>
+            
+            <button class="btn" type="submit">🔍 Проверить подключение</button>
+          </form>
+          
+          <div id="server-status" class="status-container" style="display: none;">
+            <div class="status-header">
+              <h4>Статус подключения</h4>
+              <span id="server-status-badge" class="status-badge"></span>
+            </div>
+            <div id="server-status-info" class="status-info"></div>
+          </div>
+        </div>
+
+        <!-- Таб 2: Выбор репозитория -->
+        <div id="repo-tab" class="tab-content">
+          <h3>📦 Выбор GitHub репозитория</h3>
+          <form id="repo-select-form">
+            <div class="form-group">
+              <label for="repo-url">Ссылка на GitHub репозиторий</label>
+              <input 
+                id="repo-url" 
+                name="repo-url" 
+                type="url" 
+                placeholder="https://github.com/username/repository" 
+                required
+                pattern="https://github\.com/.+/.+"
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="project-name">Имя проекта (опционально)</label>
+              <input 
+                id="project-name" 
+                name="project-name" 
+                type="text" 
+                placeholder="Автоматически из URL"
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="deploy-branch">Ветка для развертывания</label>
+              <select id="deploy-branch" name="deploy-branch">
+                <option value="main">main</option>
+                <option value="master">master</option>
+                <option value="develop">develop</option>
+                <option value="custom">Другая ветка</option>
+              </select>
+              <input 
+                id="custom-branch" 
+                name="custom-branch" 
+                type="text" 
+                placeholder="Введите название ветки"
+                style="display: none; margin-top: 10px;"
+              >
+            </div>
+            
+            <button class="btn" type="submit">🔍 Анализировать репозиторий</button>
+          </form>
+          
+          <div id="repo-analysis" class="analysis-container" style="display: none;">
+            <div class="analysis-header">
+              <h4>Анализ репозитория</h4>
+              <span id="repo-analysis-badge" class="status-badge"></span>
+            </div>
+            <div id="repo-analysis-info" class="analysis-info"></div>
+          </div>
+        </div>
+
+        <!-- Таб 3: Развертывание -->
+        <div id="deploy-tab" class="tab-content">
+          <h3>⚡ Автоматическое развертывание</h3>
+          <div id="deploy-summary" class="deploy-summary" style="display: none;">
+            <h4>📋 План развертывания</h4>
+            <div id="deploy-plan" class="deploy-plan"></div>
+          </div>
+          
+          <div id="deploy-controls" class="deploy-controls" style="display: none;">
+            <button id="start-deploy-btn" class="btn deploy-btn">
+              🚀 Начать развертывание
+            </button>
+            <button id="stop-deploy-btn" class="btn danger-btn" style="display: none;">
+              ⏹️ Остановить
+            </button>
+          </div>
+          
+          <div id="deploy-log" class="deploy-log" style="display: none;">
+            <h4>📜 Лог развертывания</h4>
+            <div id="log-content" class="log-content"></div>
+          </div>
+        </div>
+
+        <!-- Навигация между табами -->
+        <div class="tab-navigation">
+          <button id="prev-tab-btn" class="btn secondary-btn" onclick="previousTab()" style="display: none;">
+            ← Назад
+          </button>
+          <button id="next-tab-btn" class="btn" onclick="nextTab()" style="display: none;">
+            Далее →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/deploy.js"></script>
+</body>
+</html>

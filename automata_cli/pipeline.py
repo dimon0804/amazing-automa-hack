@@ -13,7 +13,7 @@ def run_pipeline(*, cwd: Path, config_path: Path, stage: str = 'all') -> None:
     
     # Автоматически генерируем конфиг если его нет
     if not config_path.exists():
-        print(f"🔧 No config found, auto-generating...")
+        print("No config found, auto-generating...")
         auto_generate_config(cwd, detected, force=True)
         config_path = cwd / 'automata.yml'
     

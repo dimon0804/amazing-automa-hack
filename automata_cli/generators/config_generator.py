@@ -149,7 +149,7 @@ CMD ["echo", "Hello from container"]"""
     with open(dockerfile_path, 'w', encoding='utf-8') as f:
         f.write(dockerfile_content)
     
-    print(f"🐳 Generated Dockerfile for {cwd.name}")
+    print(f"Generated Dockerfile for {cwd.name}")
 
 
 def auto_generate_config(cwd: Path, detected: Dict, force: bool = False) -> bool:
@@ -157,10 +157,10 @@ def auto_generate_config(cwd: Path, detected: Dict, force: bool = False) -> bool
     config_path = cwd / 'automata.yml'
     
     if config_path.exists() and not force:
-        print(f"✅ Config already exists: {config_path}")
+        print(f"Config already exists: {config_path}")
         return False
     
-    print(f"🔧 Generating automata.yml for {cwd.name}...")
+    print(f"Generating automata.yml for {cwd.name}...")
     
     try:
         config = generate_automata_yml(cwd, detected)
@@ -169,8 +169,8 @@ def auto_generate_config(cwd: Path, detected: Dict, force: bool = False) -> bool
         # Генерируем Dockerfile если его нет
         generate_dockerfile(cwd, detected)
         
-        print(f"✅ Generated: {config_path}")
+        print(f"Generated: {config_path}")
         return True
     except Exception as e:
-        print(f"❌ Error generating config: {e}")
+        print(f"Error generating config: {e}")
         return False

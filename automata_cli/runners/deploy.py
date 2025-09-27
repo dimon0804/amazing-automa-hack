@@ -19,12 +19,12 @@ def _deploy_docker(cwd: Path, cfg: dict) -> None:
         image = docker.get('image', f"{cwd.name}:latest")
         file = docker.get('file', 'Dockerfile')
     
-    print(f"🐳 Building Docker image: {image}")
-    _run(['docker', 'build', '-f', file, '-t', image, '.'], cwd)
-    
-    if docker and docker.get('push'):
-        print(f"📤 Pushing image: {image}")
-        _run(['docker', 'push', image], cwd)
+        print(f"Building Docker image: {image}")
+        _run(['docker', 'build', '-f', file, '-t', image, '.'], cwd)
+        
+        if docker and docker.get('push'):
+            print(f"Pushing image: {image}")
+            _run(['docker', 'push', image], cwd)
     
     # Автоматически запускаем контейнер
     _run_docker_container(cwd, image, docker)
@@ -38,24 +38,29 @@ def _run_docker_container(cwd: Path, image: str, docker_config: dict) -> None:
     _run(['docker', 'stop', container_name], cwd)
     _run(['docker', 'rm', container_name], cwd)
     
-    # Определяем порт из Dockerfile или используем по умолчанию
-    port = docker_config.get('port', 8000) if docker_config else 8000
+    # Определяем порт из конфига или используем по умолчанию
+    port = 8000
+    if docker_config and 'port' in docker_config:
+        port = docker_config['port']
     
     # Определяем переменные окружения
-    env_vars = docker_config.get('env', {}) if docker_config else {}
+    env_vars = {}
+    if docker_config and 'env' in docker_config:
+        env_vars = docker_config['env'] or {}
+    
     env_args = []
     for key, value in env_vars.items():
         env_args.extend(['-e', f'{key}={value}'])
     
     # Запускаем контейнер
     cmd = ['docker', 'run', '-d', '--rm', '--name', container_name, f'-p{port}:{port}'] + env_args + [image]
-    print(f"🚀 Starting container: {container_name} on port {port}")
+    print(f"Starting container: {container_name} on port {port}")
     _run(cmd, cwd)
     
-    print(f"✅ Application is running at: http://localhost:{port}")
-    print(f"📋 Container name: {container_name}")
-    print(f"🔍 To view logs: docker logs {container_name}")
-    print(f"🛑 To stop: docker stop {container_name}")
+    print(f"Application is running at: http://localhost:{port}")
+    print(f"Container name: {container_name}")
+    print(f"To view logs: docker logs {container_name}")
+    print(f"To stop: docker stop {container_name}")
 
 
 def _deploy_ssh(cwd: Path, cfg: dict) -> None:

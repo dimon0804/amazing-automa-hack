@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styleses.css">
+  <title>Профиль пользователя</title>
+</head>
+<body>
+  <header class="header">
+    <button class="btn ghost" onclick="location.href='index.html'">← Назад к проверке</button>
+    <div class="profile-menu">
+      <button class="btn ghost" onclick="location.href='index.html'">🏠 Главная</button>
+    </div>
+  </header>
+
+  <div class="profile-wrapper">
+    <div class="profile-container">
+      <div class="card profile-card">
+        <div class="profile-header">
+          <div class="avatar">
+            <img src="хак/orig.webp" alt="Аватар">
+          </div>
+          <div class="profile-info">
+            <h1 id="user-name">Агриппина</h1>
+            <p id="user-email">agrippina@example.com</p>
+          </div>
+        </div>
+
+        <div class="profile-stats">
+          <div class="stat-item">
+            <span class="stat-number" id="checks-count">12</span>
+            <span class="stat-label">Проверок выполнено</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="open-repos">8</span>
+            <span class="stat-label">Открытых репозиториев</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="private-repos">4</span>
+            <span class="stat-label">Закрытых репозиториев</span>
+          </div>
+        </div>
+
+        <div class="profile-sections">
+          <div class="section">
+           <div class="section">
+  <h3>📊 Статистика активности</h3>
+  <div class="activity-chart">
+    <div class="trend-line"></div>
+    <div class="chart-bar" style="height: 80%" data-value="80%">Пн</div>
+    <div class="chart-bar" style="height: 60%" data-value="60%">Вт</div>
+    <div class="chart-bar" style="height: 90%" data-value="90%">Ср</div>
+    <div class="chart-bar" style="height: 70%" data-value="70%">Чт</div>
+    <div class="chart-bar" style="height: 85%" data-value="85%">Пт</div>
+    <div class="chart-bar" style="height: 50%" data-value="50%">Сб</div>
+    <div class="chart-bar" style="height: 30%" data-value="30%">Вс</div>
+  </div>
+  <div class="day-legend">
+    <span class="day-label">Понедельник</span>
+    <span class="day-label">Воскресенье</span>
+  </div>
+</div>
+          </div>
+
+          <div class="section">
+            <h3>⚙️ Настройки профиля</h3>
+            <div class="settings-list">
+             
+              <label class="setting-item">
+                <input type="checkbox" checked> Сохранять историю проверок
+              </label>
+              <label class="setting-item">
+                <input type="checkbox"> Темная тема (активна)
+              </label>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>🎯 Последние проверки</h3>
+            <div class="recent-checks">
+              <div class="check-item">
+                <span class="repo-name">facebook/react</span>
+                <span class="check-status open">Открытый</span>
+                <span class="check-date">Сегодня, 14:30</span>
+              </div>
+              <div class="check-item">
+                <span class="repo-name">company/private-repo</span>
+                <span class="check-status private">Закрытый</span>
+                <span class="check-date">Вчера, 18:45</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-actions">
+          <button class="btn">✏️ Редактировать профиль</button>
+          <button class="btn ghost">🚪 Выйти</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="profile.js"></script>
+</body>
+</html>

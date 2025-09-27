@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/styleses.css">
+  <title>Проверка GitHub репозиториев</title>
+</head>
+<body>
+  <!-- <header class="header">
+    <button class="btn ghost" id="history-btn">📋 История проверок</button>
+    <div class="profile-menu">
+      <button class="btn ghost" id="profile-btn">👤 Профиль</button>
+    </div>
+  </header> -->
+
+ <div class="main-wrapper">
+  <div class="container main-container">
+    <div class="card">
+      <h1>Проверка GitHub репозитория</h1>
+      <p class="lead">Введите ссылку на GitHub репозиторий для проверки его доступности</p>
+      
+              <form id="check-repo-form">
+                <label for="repo-url">Ссылка на GitHub репозиторий</label>
+                <input 
+                  id="repo-url" 
+                  name="repo-url" 
+                  type="url" 
+                  placeholder="https://github.com/username/repository" 
+                  required
+                  pattern="https://github\.com/.+/.+"
+                >
+                
+                <button class="btn" type="submit">🔍 Проверить</button>
+              </form>
+              
+              <div class="action-buttons">
+                <a href="/deploy" class="btn deploy-link">
+                  🚀 Развернуть на сервере
+                </a>
+              </div>
+
+      <div id="result" class="result-container" style="display: none;">
+        <div class="result-header">
+          <h3>Результат проверки</h3>
+          <span id="repo-status" class="status-badge"></span>
+        </div>
+        <div id="repo-info" class="repo-info"></div>
+      </div>
+
+      <div id="history" class="history-container" style="display: none;">
+        <h3>История проверок</h3>
+        <div id="history-list" class="history-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/fixed-github-checker.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styleses.css">
+  <title>Вход / Регистрация</title>
+
+</head>
+<body>
+  <div class="container">
+    <aside class="promo">
+      
+        <div class="logo">
+  <div class="mark">
+    <div class="img-container">
+      <img src="хак/CLV DIGITAL_bg-white.png" alt="CLV Digital">
+    </div>
+  </div>
+  <div>
+    <div style="font-weight:700">CLV — Digital</div>
+    <div style="font-size:13px;color:var(--muted)">Безопасный вход и удобная регистрация</div>
+  </div>
+</div>
+       
+      <h1>Добро пожаловать</h1>
+      <p class="lead">Войдите в аккаунт или зарегистрируйтесь, чтобы продолжить.</p>
+      <ul class="features">
+        <li>Защищённые сессии и валидация</li>
+        <li>Адаптивный интерфейс для мобильных устройств</li>
+      </ul>
+      <div class="foot">© 2025 CLV. Все права защищены.</div>
+    </aside>
+
+    <main class="card">
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="login">Вход</button>
+        <button class="tab" data-tab="signup">Регистрация</button>
+      </div>
+
+      <!-- Login form -->
+      <form id="login" autocomplete="on">
+        <label for="login-username">Email или логин</label>
+        <input id="login-username" name="username" type="text" placeholder="Введите email или логин" required>
+
+        <label for="login-password">Пароль</label>
+        <div class="row">
+          <div class="col">
+            <input id="login-password" name="password" type="password" placeholder="Пароль" required>
+          </div>
+          <div style="display:flex;align-items:center">
+            <button type="button" class="btn ghost" id="show-login-pw" aria-pressed="false">Показать</button>
+          </div>
+        </div>
+
+        <div class="actions">
+          <div class="small"><label><input type="checkbox" name="remember"> Запомнить меня</label></div>
+          <div class="links"><a href="#" class="small">Забыли пароль?</a></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div style="display:flex;gap:12px;align-items:center">
+          <button class="btn" type="submit">Войти</button>
+          <button class="btn ghost" type="button" id="to-signup">Создать аккаунт</button>
+        </div>
+
+        <div id="login-msg" class="hint" role="status" aria-live="polite"></div>
+      </form>
+
+      <!-- Signup form (hidden by default) -->
+      <form id="signup" style="display:none" autocomplete="on">
+        <label for="signup-name">Имя</label>
+        <input id="signup-name" name="name" type="text" placeholder="Имя и фамилия" required>
+
+        <label for="signup-email">Email</label>
+        <input id="signup-email" name="email" type="email" placeholder="example@mail.com" required>
+
+        <label for="signup-password">Пароль</label>
+        <input id="signup-password" name="password" type="password" placeholder="Придумайте надёжный пароль" minlength="8" required>
+
+        <label class="small"><input type="checkbox" id="terms"> Я принимаю условия использования</label>
+
+        <div style="display:flex;gap:12px;align-items:center;margin-top:8px">
+          <button class="btn" type="submit">Зарегистрироваться</button>
+          <button class="btn ghost" type="button" id="to-login">У меня уже есть аккаунт</button>
+        </div>
+
+        <div id="signup-msg" class="hint" role="status" aria-live="polite"></div>
+      </form>
+
+    </main>
+  </div>
+
+    <script src='hak.js'>
+    
+  </script>
+</body>
+</html>
